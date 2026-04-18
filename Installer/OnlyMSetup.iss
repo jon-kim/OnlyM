@@ -56,8 +56,14 @@ Source: "..\UrlLinkFiles\Watchtower online library.url"; DestDir: "{commonappdat
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{#SlideManagerAppName}"; Filename: "{app}\{#SlideManagerAppExeName}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: not DesktopShortcutExists
 Name: "{commondesktop}\{#SlideManagerAppName}"; Filename: "{app}\{#SlideManagerAppExeName}"; Tasks: desktopicon
+
+[Code]
+function DesktopShortcutExists: Boolean;
+begin
+  Result := FileExists(ExpandConstant('{commondesktop}\{#MyAppName}.lnk'));
+end;
 
 [ThirdParty]
 UseRelativePaths=True
